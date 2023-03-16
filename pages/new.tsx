@@ -4,7 +4,7 @@ import type { NextPageWithLayout } from './_app'
 
 const Home: NextPageWithLayout = () => {
 
-  return (<h1 className='text-gray-light'>Welcome to Nighstuck's Feedback Service</h1>);
+  return (<h1 className='text-gray-light'>New Instance</h1>);
 }
 
 Home.getLayout = function getLayout(page: ReactElement) {

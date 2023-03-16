@@ -1,10 +1,10 @@
 import type { ReactElement } from 'react'
-import Layout from '../components/l_home'
-import type { NextPageWithLayout } from './_app'
+import Layout from '../../components/l_home'
+import type { NextPageWithLayout } from '../_app'
 
 const Home: NextPageWithLayout = () => {
 
-  return (<h1 className='text-gray-light'>Welcome to Nighstuck's Feedback Service</h1>);
+  return (<h1 className='text-gray-light'>Documentation</h1>);
 }
 
 Home.getLayout = function getLayout(page: ReactElement) {
