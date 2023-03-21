@@ -1,12 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { withSessionRoute } from "@/lib/iron";
+import { getInstancesOfUserId } from "@/lib/prisma";
 
 type Data = {
 	ok: boolean;
-	user?: {
-		username: string;
-		email: string;
-	} | null;
+	instances?: any;
 	error?: string;
 };
 
@@ -15,7 +13,7 @@ export default withSessionRoute(handler);
 async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 	if (req.method != "GET") return res.status(405).send({ ok: false, error: "method" });
 
-	if (req.session.user == undefined) return res.status(401).send({ ok: false, error: "login" });
+	const instances = await getInstancesOfUserId(req.session.user.user_id);
 
-	res.status(200).send({ ok: true, user: req.session.user });
+	res.status(200).send({ ok: true, instances: instances });
 }

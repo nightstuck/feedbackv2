@@ -43,6 +43,7 @@ async function loginRoute(req: NextApiRequest, res: NextApiResponse<Data>) {
 	if (samePassword == false) res.status(401).send({ login: false, error: "password" });
 
 	req.session.user = {
+		user_id: user.id,
 		username: user.username,
 		email: user.email,
 	};

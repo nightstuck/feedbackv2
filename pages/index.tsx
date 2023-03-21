@@ -1,3 +1,4 @@
+import Placeholder from '@/components/placeholder';
 import type { ReactElement } from 'react'
 import Layout from '../components/l_home'
 import type { NextPageWithLayout } from './_app'

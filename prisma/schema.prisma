@@ -8,16 +8,17 @@ datasource db {
 }
 
 model feedback {
-  id        Int      @id @default(autoincrement())
-  author    String?  @db.VarChar(255)
-  text      String   @db.VarChar(5000)
-  timestamp DateTime @default(now()) @db.Timestamp(0)
+  id          Int      @id @default(autoincrement())
+  author      String?  @db.VarChar(255)
+  text        String   @db.VarChar(5000)
+  timestamp   DateTime @default(now()) @db.Timestamp(0)
+  instance_id Int
 }
 
 model instance {
   id         Int    @id @default(autoincrement())
   secure     Int    @default(0) @db.TinyInt
-  name       Int    @default(0)
+  name       String @default("0") @db.VarChar(255)
   anonymous  Int    @default(0) @db.TinyInt
   identifier String @default("0") @db.VarChar(200)
   user_id    Int

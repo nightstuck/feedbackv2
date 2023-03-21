@@ -3,7 +3,8 @@ import { GetServerSidePropsContext, GetServerSidePropsResult, NextApiHandler } f
 
 declare module "iron-session" {
 	interface IronSessionData {
-		user?: {
+		user: {
+			user_id: number;
 			username: string;
 			email: string;
 		};

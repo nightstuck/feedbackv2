@@ -12,6 +12,7 @@ module.exports = {
 			pc: "1440px",
 		},
 		colors: {
+			transparent: "#00000000",
 			white: "#fff",
 			black: "#000",
 			red: colors.red,
@@ -35,13 +36,15 @@ module.exports = {
 				"dark-bg": "url('../public/background.jpg')",
 			},
 			spacing: {
+				112: "30rem",
 				128: "32rem",
 				144: "36rem",
+				"2px": "2px",
 			},
 			borderRadius: {
 				"4xl": "2rem",
 			},
 		},
 	},
-	plugins: [],
+	plugins: [require("tailwind-scrollbar")],
 };
