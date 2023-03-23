@@ -12,11 +12,13 @@ type Data = {
 export default withSessionRoute(handler);
 
 async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-	if (req.method != "POST") return res.status(405).send({ ok: false, error: "method" });
+	if (req.method != "GET") return res.status(405).send({ ok: false, error: "method" });
 
-	if (!req.body.interface_id) return res.status(404).send({ ok: false, error: "data" });
+	let { id } = req.query;
 
-	const feedbacks = await getFeedbacksByInstanceId(req.body.interface_id);
+	if (id == undefined) return res.status(404).send({ ok: false, error: "data" });
+
+	const feedbacks = await getFeedbacksByInstanceId(Number(id));
 
 	res.status(200).send({ ok: true, feedbacks: feedbacks });
 }

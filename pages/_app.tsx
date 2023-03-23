@@ -2,6 +2,7 @@ import { ReactElement, ReactNode } from 'react'
 import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 import '../styles/globals.css'
+import 'react-tooltip/dist/react-tooltip.css'
 import { RouteGuard } from '@/components/routeguard'
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {

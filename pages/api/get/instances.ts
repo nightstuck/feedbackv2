@@ -15,5 +15,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 
 	const instances = await getInstancesOfUserId(req.session.user.user_id);
 
-	res.status(200).send({ ok: true, instances: instances });
+	const inst = instances?.map((i) => {
+		return { name: i.name, anonymous: i.anonymous, secure: i.secure, id: i.id };
+	});
+
+	res.status(200).send({ ok: true, instances: inst });
 }
