@@ -53,12 +53,12 @@ const Login: NextPageWithLayout = () => {
         <span className='text-gray-light w-4/5'>
           Username or E-Mail
         </span>
-        <input className='w-4/5 p-1 text-gray-light bg-dark-bg rounded-lg border-solid border-gray-light border' tabIndex={1} ref={userInput} onChange={(e) => { setUsernameInput(e.target.value); }} type={"text"}></input>
+        <input className='w-4/5 p-1 text-gray-light bg-dark-bg rounded-lg border-solid border-gray-light border' tabIndex={1} ref={userInput} onChange={(e) => { setUsernameInput(e.target.value); }} onKeyDown={(e) => { if (e.key == 'Enter') userLogin(); }} type={"text"}></input>
         <span className='text-gray-light w-4/5 flex flex-row justify-between'>
           Password
           <Link className='text-gray-light hover:text-green' href={"/resetpassword"}>Forgot password?</Link>
         </span>
-        <input className='w-4/5 p-1 text-gray-light bg-dark-bg rounded-lg border-solid border-gray-light border' tabIndex={2} onChange={(e) => { setPasswordInput(e.target.value); }} type={"password"}></input>
+      <input className='w-4/5 p-1 text-gray-light bg-dark-bg rounded-lg border-solid border-gray-light border' tabIndex={2} onChange={(e) => { setPasswordInput(e.target.value); }} onKeyDown={(e) => { if (e.key == 'Enter') userLogin(); }} type={"password"}></input>
         {ErrorOutput.show && <span className='w-4/5 text-gray-light bg-red-700/60 rounded-lg border border-solid border-red-500 p-1 text-center'>{ErrorOutput.text}</span>}
         <button className='w-2/5 text-gray-light border rounded-lg hover:bg-c-green-700 p-1' tabIndex={3} onClick={userLogin}>Login</button>
     </>
