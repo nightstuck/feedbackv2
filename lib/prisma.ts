@@ -34,9 +34,13 @@ export async function getInstancesOfUserId(user_id: number) {
 
 	const instances = await db.instance.findMany({ where: whereUser_id });
 
+	const inst = instances?.map((i) => {
+		return { name: i.name, anonymous: Boolean(i.anonymous), secure: Boolean(i.secure), id: i.id };
+	});
+
 	db.$disconnect();
 
-	return instances.length == 0 ? null : instances;
+	return instances.length == 0 ? null : inst;
 }
 
 export async function createInstance(

@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { withSessionRoute } from "@/lib/iron";
-import { createInstance, getInstancesOfUserId } from "@/lib/prisma";
 import { instance, Prisma, PrismaClient } from "@prisma/client";
 import { hashPassword, isSamePassword } from "@/lib/bcrypt";
 
@@ -18,20 +17,25 @@ async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 
 	const db = new PrismaClient();
 
-	if (instance.secure == true) {
-		const whereInstanceId = Prisma.validator<Prisma.instanceWhereUniqueInput>()({
-			id: instance.id,
-		});
-		const inst = await db.instance.findUnique({ where: whereInstanceId });
-		if (inst && !(await isSamePassword(feedback.password, inst?.identifier)))
+	const whereInstanceId = Prisma.validator<Prisma.instanceWhereUniqueInput>()({
+		id: instance.id,
+	});
+	const inst = await db.instance.findUnique({ where: whereInstanceId });
+	if (inst == null) return res.status(404).send({ ok: false, error: "id" });
+
+	if (Boolean(inst.secure) == true) {
+		if (!(await isSamePassword(feedback.password, inst?.identifier)))
 			return res.status(401).send({ ok: false, error: "password" });
 	}
+
+	let author = Boolean(inst.anonymous) ? "" : feedback.author;
+	console.log(Boolean(inst.anonymous));
 
 	await db.feedback.create({
 		data: {
 			instance_id: instance.id,
 			text: feedback.text,
-			author: feedback.author,
+			author: author,
 		},
 	});
 

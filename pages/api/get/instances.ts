@@ -4,7 +4,14 @@ import { getInstancesOfUserId } from "@/lib/prisma";
 
 type Data = {
 	ok: boolean;
-	instances?: any;
+	instances?:
+		| {
+				name: string;
+				anonymous: boolean;
+				secure: boolean;
+				id: number;
+		  }[]
+		| null;
 	error?: string;
 };
 
@@ -15,9 +22,5 @@ async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 
 	const instances = await getInstancesOfUserId(req.session.user.user_id);
 
-	const inst = instances?.map((i) => {
-		return { name: i.name, anonymous: i.anonymous, secure: i.secure, id: i.id };
-	});
-
-	res.status(200).send({ ok: true, instances: inst });
+	res.status(200).send({ ok: true, instances: instances });
 }

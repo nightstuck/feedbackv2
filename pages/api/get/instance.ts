@@ -7,6 +7,7 @@ type Data = {
 	ok: boolean;
 	instance?: {
 		id: number;
+		name: string;
 		secure: boolean;
 		anonymous: boolean;
 	};
@@ -26,10 +27,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
 	if (!instance) res.status(404).send({ ok: false, error: "not found" });
 	else
-		res
-			.status(200)
-			.send({
-				ok: true,
-				instance: { id: instance.id, secure: Boolean(instance.secure), anonymous: Boolean(instance.anonymous) },
-			});
+		res.status(200).send({
+			ok: true,
+			instance: {
+				id: instance.id,
+				name: instance.name,
+				secure: Boolean(instance.secure),
+				anonymous: Boolean(instance.anonymous),
+			},
+		});
 }

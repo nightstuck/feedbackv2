@@ -4,8 +4,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Forum from "../public/forum_light.svg";
-import Menu from "../public/menu.svg"
-import Close from "../public/close.svg"
+import Menu from "../public/menu.svg";
+import Close from "../public/close.svg";
+
 
 const Navbar = () => {
     const router = useRouter();
