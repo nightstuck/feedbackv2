@@ -35,7 +35,13 @@ export async function getInstancesOfUserId(user_id: number) {
 	const instances = await db.instance.findMany({ where: whereUser_id });
 
 	const inst = instances?.map((i) => {
-		return { name: i.name, anonymous: Boolean(i.anonymous), secure: Boolean(i.secure), id: i.id };
+		return {
+			name: i.name,
+			anonymous: Boolean(i.anonymous),
+			secure: Boolean(i.secure),
+			id: i.id,
+			access_key: i.access_key,
+		};
 	});
 
 	db.$disconnect();
@@ -48,7 +54,8 @@ export async function createInstance(
 	user_id: any,
 	anonymous: boolean,
 	secure: boolean,
-	identifier: string
+	identifier: string,
+	access_key: string
 ) {
 	const db = new PrismaClient();
 
@@ -71,6 +78,7 @@ export async function createInstance(
 			name: name,
 			secure: Number(secure),
 			identifier: identifier,
+			access_key: access_key,
 		},
 	});
 
@@ -82,13 +90,27 @@ export async function createInstance(
 export async function getFeedbacksByInstanceId(instance_id: number) {
 	const db = new PrismaClient();
 
-	const whereUserId = Prisma.validator<Prisma.feedbackWhereInput>()({
+	const whereInstanceId = Prisma.validator<Prisma.feedbackWhereInput>()({
 		instance_id: instance_id,
 	});
 
-	const feedbacks = await db.feedback.findMany({ where: whereUserId });
+	const feedbacks = await db.feedback.findMany({ where: whereInstanceId });
 
 	db.$disconnect();
 
 	return feedbacks;
+}
+
+export async function getAccessKeyById(instance_id: number) {
+	const db = new PrismaClient();
+
+	const whereUniqueInstanceId = Prisma.validator<Prisma.instanceWhereUniqueInput>()({
+		id: instance_id,
+	});
+
+	const instance = await db.instance.findUnique({ where: whereUniqueInstanceId });
+
+	db.$disconnect();
+
+	return instance ? instance.access_key : null;
 }

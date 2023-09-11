@@ -1,9 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 
 const colors = require("tailwindcss/colors");
+const { nextui } = require("@nextui-org/react");
 
 module.exports = {
-	content: ["./app/**/*.{js,ts,jsx,tsx}", "./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+	darkMode: "class",
+	content: [
+		"./app/**/*.{js,ts,jsx,tsx}",
+		"./pages/**/*.{js,ts,jsx,tsx}",
+		"./components/**/*.{js,ts,jsx,tsx}",
+		"./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
+	],
 	theme: {
 		screens: {
 			sp: "480px",
@@ -53,7 +60,97 @@ module.exports = {
 			boxShadow: {
 				"inner-sm": "inset 0 1px 2px 0 rgb(0 0 0 / 0.05)",
 			},
+			minWidth: {
+				100: "100px",
+				200: "200px",
+				300: "300px",
+				400: "400px",
+				"80pc": "80%",
+				"90pc": "90%",
+			},
 		},
 	},
-	plugins: [require("tailwind-scrollbar")],
+	plugins: [
+		require("tailwind-scrollbar"),
+		nextui({
+			darkMode: "class",
+			themes: {
+				dark: {
+					colors: {
+						background: "#000400",
+						foreground: "#ffffff",
+						primary: {
+							50: "#CEFCD0",
+							100: "#CEFCD0",
+							200: "#9FFAAC",
+							300: "#6DF08D",
+							400: "#48E17C",
+							500: "#13CE66",
+							600: "#0DB166",
+							700: "#099462",
+							800: "#06775A",
+							900: "#036253",
+							DEFAULT: "#13CE66",
+							foreground: "#ffffff",
+						},
+						success: {
+							50: "#CDFDD4",
+							100: "#CDFDD4",
+							200: "#9CFCB3",
+							300: "#6AF899",
+							400: "#45F290",
+							500: "#0BEA82",
+							600: "#08C982",
+							700: "#05A87D",
+							800: "#038771",
+							900: "#027068",
+							DEFAULT: "#0BEA82",
+							foreground: "#ffffff",
+						},
+						secondary: {
+							50: "#D3E5FE",
+							100: "#D3E5FE",
+							200: "#A8C9FD",
+							300: "#7CAAFB",
+							400: "#5B8FF8",
+							500: "#2764F4",
+							600: "#1C4CD1",
+							700: "#1338AF",
+							800: "#0C268D",
+							900: "#071A75",
+							DEFAULT: "#2764F4",
+							foreground: "#ffffff",
+						},
+						warning: {
+							100: "#FFFDD1",
+							200: "#FFFAA4",
+							300: "#FFF776",
+							400: "#FFF454",
+							500: "#FFEF1C",
+							600: "#DBCB14",
+							700: "#B7A90E",
+							800: "#938708",
+							900: "#7A6E05",
+							DEFAULT: "#FFEF1C",
+							foreground: "#ffffff",
+						},
+						danger: {
+							100: "#FFE6DB",
+							200: "#FFC8B8",
+							300: "#FFA395",
+							400: "#FF807A",
+							500: "#FF4F57",
+							600: "#DB394F",
+							700: "#B72747",
+							800: "#93193F",
+							900: "#7A0F3A",
+							DEFAULT: "#FF4F57",
+							foreground: "#ffffff",
+						},
+						focus: "#F182F6",
+					},
+				},
+			},
+		}),
+	],
 };

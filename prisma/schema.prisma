@@ -22,6 +22,7 @@ model instance {
   anonymous  Int    @default(0) @db.TinyInt
   identifier String @default("0") @db.VarChar(200)
   user_id    Int
+  access_key String @db.VarChar(50)
 }
 
 model user {

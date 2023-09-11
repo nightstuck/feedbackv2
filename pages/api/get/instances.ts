@@ -10,6 +10,7 @@ type Data = {
 				anonymous: boolean;
 				secure: boolean;
 				id: number;
+				access_key: string;
 		  }[]
 		| null;
 	error?: string;

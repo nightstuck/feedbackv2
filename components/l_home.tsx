@@ -7,9 +7,7 @@ const L_Home = ({ children }: PropsWithChildren) => {
 	return (
 		<div className="w-full h-screen">
 			<Navbar></Navbar>
-			<div className="pt-12 w-full h-full relative">
 			{children}
-			</div>
 			<Footer></Footer>
 		</div>
 	);

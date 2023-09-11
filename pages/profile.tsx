@@ -1,13 +1,11 @@
-import Placeholder from '@/components/placeholder';
-import type { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import Layout from '../components/l_home';
-import type { NextPageWithLayout } from './_app';
 import Head from 'next/head';
-import NextLink from 'next/link';
-import { Accordion, AccordionItem, Card, CardBody, CardHeader, Divider, Link } from '@nextui-org/react';
+import type { NextPageWithLayout } from './_app';
+import { Card, CardHeader, CardBody, Divider } from '@nextui-org/react';
 import Help from '@/components/help';
 
-const Home: NextPageWithLayout = () => {
+const Profile: NextPageWithLayout = () => {
 
   return (
     <>
@@ -38,10 +36,10 @@ const Home: NextPageWithLayout = () => {
   );
 }
 
-Home.getLayout = function getLayout(page: ReactElement) {
+Profile.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout>{page}</Layout>
   )
 }
 
-export default Home;
+export default Profile;

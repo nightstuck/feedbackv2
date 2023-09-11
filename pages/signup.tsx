@@ -3,6 +3,7 @@ import Layout from '../components/l_login'
 import { ReactElement, useCallback, useEffect, useState } from 'react'
 import { api } from '@/lib/api';
 import {useRouter} from 'next/router';
+import { Button, Input } from '@nextui-org/react';
 
 const Login: NextPageWithLayout = () => {
     const [UsernameInput, setUsernameInput] = useState<string>("");
@@ -12,10 +13,6 @@ const Login: NextPageWithLayout = () => {
     const [ErrorOutput, setErrorOutput] = useState<{ show: boolean, text?: string }>({ show: false });
 
     const router = useRouter();
-
-    const userInput = useCallback((inputElement:HTMLInputElement) => {
-        if (inputElement) inputElement.focus();
-    }, []);
 
     useEffect(() => { 
         if (PasswordInput.length < 8) return setErrorOutput({ show: true, text: "Your Password is too short!" })
@@ -55,18 +52,14 @@ const Login: NextPageWithLayout = () => {
     }
 
     return (
-        <>
-            <span className='text-gray-light w-4/5'>Username</span>
-            <input className='w-4/5 p-1 text-gray-light bg-dark-bg rounded-lg border-solid border-gray-light border' tabIndex={1} ref={userInput} onChange={(e) => { setUsernameInput(e.target.value); }} type={"text"}></input>
-            <span className='text-gray-light w-4/5'>E-Mail</span>
-            <input className='w-4/5 p-1 text-gray-light bg-dark-bg rounded-lg border-solid border-gray-light border' tabIndex={2} onChange={(e) => { setEmailInput(e.target.value); }} type={"text"}></input>
-            <span className='text-gray-light w-4/5 flex flex-row justify-between'>Password</span>
-            <input className='w-4/5 p-1 text-gray-light bg-dark-bg rounded-lg border-solid border-gray-light border' tabIndex={3} onChange={(e) => { setPasswordInput(e.target.value); }} type={"password"}></input>
-            <span className='text-gray-light w-4/5 flex flex-row justify-between'>Re-type password</span>
-            <input className='w-4/5 p-1 text-gray-light bg-dark-bg rounded-lg border-solid border-gray-light border' tabIndex={3} onChange={(e) => { setRetypeInput(e.target.value); }} type={"password"}></input>
+        <section className='flex flex-col items-center gap-2'>
+            <Input label="Choose your Username" className='' tabIndex={1} onChange={(e) => { setUsernameInput(e.target.value); }} type={"text"}></Input>
+            <Input label="Your E-Mail" className='' tabIndex={2} onChange={(e) => { setEmailInput(e.target.value); }} type={"text"}></Input>
+            <Input label="Choose a Password" className='' tabIndex={3} onChange={(e) => { setPasswordInput(e.target.value); }} type={"password"}></Input>
+            <Input label="Re-Type the Password" className='' tabIndex={3} onChange={(e) => { setRetypeInput(e.target.value); }} type={"password"}></Input>
             {ErrorOutput.show && <span className='w-4/5 text-gray-light bg-red-700/60 rounded-lg border border-solid border-red-500 p-1 text-center'>{ErrorOutput.text}</span>}
-            <button className='w-2/5 text-gray-light border rounded-lg hover:bg-c-green-700 p-1' tabIndex={4} onClick={userSignUp}>Sign up</button>
-        </>
+            <Button color='primary' className='' tabIndex={4} onClick={userSignUp}>Sign up</Button>
+        </section>
     );
 }
 

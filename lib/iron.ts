@@ -12,7 +12,7 @@ declare module "iron-session" {
 }
 
 const sessionOptions = {
-	password: "15fEqF8Q9e00W4tpnf96E0LoosqZr7QVQdfh",
+	password: "super_secure_string",
 	cookieName: "feedback_sessioncookie",
 	// secure: true should be used in production (HTTPS) but can't be used in development (HTTP)
 	cookieOptions: {
